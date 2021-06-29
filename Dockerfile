@@ -7,9 +7,9 @@ ENV AWS_SDK2_VERSION 2.16.91
 
 WORKDIR /tmp
 
-RUN curl -SL https://github.com/aws/aws-sdk-java-v2/archive/refs/tags/$AWS_SDK2_VERSION.tar.gz | tar -zxC ./ && \
+RUN source modules.sh && \
+    curl -SL https://github.com/aws/aws-sdk-java-v2/archive/refs/tags/$AWS_SDK2_VERSION.tar.gz | tar -zxC ./ && \
     cd /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION && \
-    source modules.sh && \
     for MODULE in $MODULES; do echo "$MODULE" ; done
 
 #    mvn clean install -pl :iot -P quick --am && \
