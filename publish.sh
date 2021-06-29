@@ -3,15 +3,17 @@
 source ./config.sh
 
 DESCRIPTION="AWS_SDK_JAVA ${AWS_SDK2_VERSION}"
-FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}.zip
+FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}
 
-aws s3api create-bucket --bucket ${BUCKET}
+aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-northeast-1
 
-aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip --create-bucket-configuration LocationConstraint=${REGION[0]}
+aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip
 
 for REGION in $REGIONS; do
   aws s3api create-bucket --bucket ${BUCKET}-${REGION} --region $REGION --create-bucket-configuration LocationConstraint=$REGION
- && \
+done
+
+for REGION in $REGIONS; do
   aws s3api copy-object --region $REGION --copy-source ${BUCKET}/layers/${FILENAME} \
     --bucket ${BUCKET}-${REGION} --key layers/${FILENAME} && \
   aws lambda add-layer-version-permission --region $REGION --layer-name $LAYER_NAME \
