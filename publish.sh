@@ -7,10 +7,11 @@ FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}.zip
 
 aws s3api create-bucket --bucket ${BUCKET}
 
-aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip
+aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip --create-bucket-configuration LocationConstraint=${REGION[0]}
 
 for REGION in $REGIONS; do
-  aws s3api create-bucket --bucket ${BUCKET}-${REGION} --region $REGION && \
+  aws s3api create-bucket --bucket ${BUCKET}-${REGION} --region $REGION --create-bucket-configuration LocationConstraint=$REGION
+ && \
   aws s3api copy-object --region $REGION --copy-source ${BUCKET}/layers/${FILENAME} \
     --bucket ${BUCKET}-${REGION} --key layers/${FILENAME} && \
   aws lambda add-layer-version-permission --region $REGION --layer-name $LAYER_NAME \
