@@ -1,9 +1,7 @@
-FROM lambci/lambda:build-java8.al2
-# FROM lambci/lambda:build-java8
+#FROM lambci/lambda:build-java8.al2
+FROM lambci/lambda:build-java8
 
 COPY modules.sh /tmp/
-
-#ENV AWS_SDK2_VERSION 2.16.91
 
 WORKDIR /tmp
 
@@ -14,10 +12,8 @@ RUN source /tmp/modules.sh && \
 
 WORKDIR /opt
 
-RUN mkdir -p ./java/lib && \
+RUN source /tmp/modules.sh && \
+    mkdir -p ./java/lib && \
     for MODULE in $MODULES; do cp /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/services/$MODULE/target/aws-sdk-java-$MODULE-$AWS_SDK2_VERSION.jar ./java/lib ; done && \
-    zip -yr /tmp/aws-sdk-java-v2-layer.zip ./*
-
-WORKDIR /tmp
-
-RUN rm -rf ./aws-sdk-java-v2-$AWS_SDK2_VERSION
+    zip -yr /tmp/aws-sdk-java-v2-layer.zip ./* && \
+    rm -rf /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/
