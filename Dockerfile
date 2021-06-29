@@ -7,7 +7,7 @@ ENV AWS_SDK2_VERSION 2.16.91
 
 WORKDIR /tmp
 
-RUN source modules.sh && \
+RUN source /tmp/modules.sh && \
     curl -SL https://github.com/aws/aws-sdk-java-v2/archive/refs/tags/$AWS_SDK2_VERSION.tar.gz | tar -zxC ./ && \
     cd /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION && \
     for MODULE in $MODULES; do echo "$MODULE" ; done
