@@ -12,4 +12,4 @@ RUN source /tmp/config.sh && \
     mkdir -p /opt/java/lib && \
     for MODULE in $MODULES; do cp /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/services/$MODULE/target/aws-sdk-java-$MODULE-$AWS_SDK2_VERSION.jar ./java/lib ; done && \
     zip -yr /tmp/layer.zip ./* && \
-#    rm -rf /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/
+    rm -rf /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/
