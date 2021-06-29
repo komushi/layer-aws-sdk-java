@@ -3,29 +3,21 @@ FROM lambci/lambda:build-java8.al2
 
 COPY modules.sh /tmp/
 
-ENV AWS_SDK2_VERSION 2.16.91
+#ENV AWS_SDK2_VERSION 2.16.91
 
 WORKDIR /tmp
 
 RUN source /tmp/modules.sh && \
     curl -SL https://github.com/aws/aws-sdk-java-v2/archive/refs/tags/$AWS_SDK2_VERSION.tar.gz | tar -zxC ./ && \
     cd /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION && \
-    for MODULE in $MODULES; do mvn clean install -pl :"$MODULE" -P quick --am ; done
+    for MODULE in $MODULES; do mvn clean install -pl :$MODULE -P quick --am ; done
 
-#    mvn clean install -pl :iot -P quick --am && \
-#    mvn clean install -pl :ecr -P quick --am && \
-#    mvn clean install -pl :ec2 -P quick --am && \
-#    mvn clean install -pl :sts -P quick --am && \
-#    mvn clean install -pl :cloudformation -P quick --am && \
-#    mvn clean install -pl :iot -P quick --am && \
-#    mvn clean install -pl :greengrass -P quick --am && \
-#    mvn clean install -pl :lambda -P quick --am && \
-#    mvn clean install -pl :iam -P quick --am && \
-#    mvn clean install -pl :cloudwatchlogs -P quick --am && \
-#    mvn clean install -pl :secretsmanager -P quick --am && \
+WORKDIR /opt
 
-#WORKDIR /opt
+RUN mkdir -p ./java/lib && \
+    for MODULE in $MODULES; do cp /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/services/$MODULE/target/aws-sdk-java-$MODULE-$AWS_SDK2_VERSION.jar ./java/lib ; done && \
+    zip -yr /tmp/aws-sdk-java-v2-layer.zip ./*
 
-#RUN mkdir -p ./java/lib && \
-#    cp /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION/services/iot/target/aws-sdk-java-iot-$AWS_SDK2_VERSION.jar ./java/lib && \
-#    zip -yr /tmp/aws-sdk-java-v2-layer.zip ./*
+WORKDIR /tmp
+
+RUN rm -rf ./aws-sdk-java-v2-$AWS_SDK2_VERSION
