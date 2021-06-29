@@ -10,7 +10,7 @@ WORKDIR /tmp
 RUN source /tmp/modules.sh && \
     curl -SL https://github.com/aws/aws-sdk-java-v2/archive/refs/tags/$AWS_SDK2_VERSION.tar.gz | tar -zxC ./ && \
     cd /tmp/aws-sdk-java-v2-$AWS_SDK2_VERSION && \
-    for MODULE in $MODULES; do echo "$MODULE" ; done
+    for MODULE in $MODULES; do mvn clean install -pl :"$MODULE" -P quick --am ; done
 
 #    mvn clean install -pl :iot -P quick --am && \
 #    mvn clean install -pl :ecr -P quick --am && \
