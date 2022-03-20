@@ -4,8 +4,11 @@ source ./config.sh
 
 DESCRIPTION="AWS_SDK_JAVA ${AWS_SDK2_VERSION}"
 FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}
+DOCKERHUBREPO="komushi/${LAYER_NAME}-layer-builder"
 
-aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-northeast-1
+docker run $DOCKERHUBREPO:$AWS_SDK2_VERSION cat /tmp/layer.zip > $FILENAME.zip
+
+aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-southeast-1
 
 aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip
 
