@@ -4,9 +4,21 @@ source ./config.sh
 
 DESCRIPTION="AWS_SDK_JAVA ${AWS_SDK2_VERSION}"
 FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}
-DOCKERHUBREPO="komushi/${LAYER_NAME}-layer-builder"
+DOCKERHUBREPO="${DOCKER_HUB_USER}/${LAYER_NAME}-layer-builder"
 
-docker run $DOCKERHUBREPO:$AWS_SDK2_VERSION cat /tmp/layer.zip > $FILENAME.zip
+# docker run $DOCKERHUBREPO:$AWS_SDK2_VERSION cat /tmp/layer.zip > $FILENAME.zip
+
+cmd="docker run ${DOCKERHUBREPO}:${AWS_SDK2_VERSION} cat /tmp/layer.zip > ${FILENAME}.zip"
+$cmd
+status=$?
+
+if [[ $status -eq 0  ]]; then
+  echo "docker run ${DOCKERHUBREPO}:${AWS_SDK2_VERSION} command was successful!"
+else
+  echo "docker run ${DOCKERHUBREPO}:${AWS_SDK2_VERSION} command failed!"
+  echo "please run 'bash build.sh' first!"
+  exit $status
+fi
 
 aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-southeast-1
 
