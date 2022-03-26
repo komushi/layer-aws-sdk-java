@@ -1,5 +1,6 @@
-#FROM lambci/lambda:build-java8.al2
-FROM lambci/lambda:build-java8
+ARG JAVA_VERSION="java11"
+
+FROM lambci/lambda:build-${JAVA_VERSION}
 
 COPY config.sh /tmp/
 
