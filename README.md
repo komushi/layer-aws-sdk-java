@@ -19,6 +19,12 @@ $ bash ./publish.sh
 $ bash ./build.sh
 ```
 
+### 3-1. Test to export aws-sdk-java zip file
+
+```
+$ docker run komushi/aws-sdk-java-builder-java11:2.17.152 cat /tmp/layer.zip > aws-sdk-java-2.17.152.zip
+```
+
 
 # Dockerfile reference
 ## How to build from source
