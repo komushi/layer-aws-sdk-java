@@ -50,3 +50,6 @@ https://github.com/aws/aws-sdk-java-v2/tags
 
 ## How to find existing aws-sdk-java java8 images on docker hub
 https://hub.docker.com/repository/docker/komushi/aws-sdk-java-builder-java8
+
+## How to find existing aws-sdk-java java11 images on docker hub
+https://hub.docker.com/repository/docker/komushi/aws-sdk-java-builder-java11
