@@ -6,10 +6,9 @@ DESCRIPTION="AWS_SDK_JAVA ${AWS_SDK2_VERSION}"
 FILENAME=${LAYER_NAME}-${AWS_SDK2_VERSION}
 DOCKERHUBREPO="${DOCKER_HUB_USER}/${LAYER_NAME}-builder-${JAVA_VERSION}"
 
-# docker run $DOCKERHUBREPO:$AWS_SDK2_VERSION cat /tmp/layer.zip > $FILENAME.zip
-
 cmd="docker run ${DOCKERHUBREPO}:${AWS_SDK2_VERSION} cat /tmp/layer.zip > ${FILENAME}.zip"
-$cmd
+echo $cmd
+eval $cmd
 status=$?
 
 if [[ $status -eq 0  ]]; then
