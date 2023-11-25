@@ -19,7 +19,7 @@ else
   exit $status
 fi
 
-aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-southeast-1
+aws s3api create-bucket --bucket ${BUCKET} --create-bucket-configuration LocationConstraint=ap-northeast-1
 
 aws s3api put-object --bucket ${BUCKET} --key layers/${FILENAME} --body ${FILENAME}.zip
 

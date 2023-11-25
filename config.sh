@@ -5,10 +5,10 @@
 # JAVA_VERSION="java8"
 
 MODULES="iot ecr ec2 sts cloudformation greengrass lambda iam cloudwatchlogs secretsmanager"
-AWS_SDK2_VERSION="2.21.29"
+AWS_SDK2_VERSION="2.17.167"
 JAVA_VERSION="java11"
 
 LAYER_NAME="aws-sdk-java"
-REGIONS="ap-southeast-1 ap-northeast-1"
-BUCKET="gocheckin-lambda-layers"
+REGIONS="ap-northeast-1"
+BUCKET="gocheckin-edge-lambda-layers"
 DOCKER_HUB_USER="komushi"
