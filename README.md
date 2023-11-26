@@ -9,7 +9,7 @@ This repo generate an builder as docker image to create aws-sdk-java(v2) as lamb
 ## 1. Edit/Confirm config.sh first
 ### 1-1. Option when iuse java11 and AWS_SDK2_VERSION >= 2.21.29
 ```
-MODULES="iot ecr ec2 sts cloudformation greengrass lambda iam cloudwatchlogs secretsmanager"
+MODULES="sqs s3 iotdataplane iot ecr ec2 sts cloudformation greengrass lambda iam cloudwatchlogs secretsmanager"
 AWS_SDK2_VERSION="2.21.29"
 JAVA_VERSION="java11"
 ```

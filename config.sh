@@ -4,7 +4,7 @@
 # AWS_SDK2_VERSION="2.16.104"
 # JAVA_VERSION="java8"
 
-MODULES="iot ecr ec2 sts cloudformation greengrass lambda iam cloudwatchlogs secretsmanager"
+MODULES="sqs s3 iotdataplane iot ecr ec2 sts cloudformation greengrass lambda iam cloudwatchlogs secretsmanager"
 AWS_SDK2_VERSION="2.21.29"
 JAVA_VERSION="java11"
 
