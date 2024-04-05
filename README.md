@@ -4,7 +4,7 @@ This repo generate an builder as docker image to create aws-sdk-java(v2) as lamb
 ## 0. Prerequisites
 * docker cli
 * aws cli
-* create a base bucket in ap-northeast-1: gocheckin-lambda-layers
+* create a base bucket in ap-northeast-1: ggp-edge-lambda-layers
 
 ## 1. Edit/Confirm config.sh first
 ### 1-1. Option when iuse java11 and AWS_SDK2_VERSION >= 2.21.29
