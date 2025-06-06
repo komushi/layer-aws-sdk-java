@@ -10,5 +10,5 @@ JAVA_VERSION="java11"
 
 LAYER_NAME="aws-sdk-java"
 REGIONS="ap-northeast-1"
-BUCKET="gocheckin-edge-lambda-layers"
+BUCKET="gocheckin-lambda-layer"
 DOCKER_HUB_USER="komushi"
